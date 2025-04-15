@@ -1,0 +1,20 @@
+import{test,chromium} from '@playwright/test';
+test('create signup page',async()=>{
+const browser=await chromium.launch({headless:false})
+const context=await browser.newContext()
+const page=await context.newPage()
+await page.goto('https://www.facebook.com/')
+const createnewaccount=await page.getByTestId('open-registration-form-button')
+await createnewaccount.click()
+await page.goto('https://www.facebook.com/r.php?entry_point=login')
+const firstname=await page.getByLabel('First name').fill('Guru')
+const Surname=await page.getByLabel('Surname').fill('KA')
+const day=await page.getByLabel('Day').selectOption('18')
+const month=await page.getByLabel('Month').selectOption('Dec')
+const year=await page.getByLabel('Year').selectOption('1993')
+const gender=await page.check('input[value="2"]')
+const email=await page.getByLabel('Mobile number or email address').fill('guru9171@gmail.com')
+const pwd=await page.getByLabel('New password').fill('Guru&1993')
+await page.click ('button[name="websubmit"]')
+})
+
